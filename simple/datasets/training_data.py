@@ -50,5 +50,192 @@ TRAIN_DATA = [
             "deps": ["VERB", "RECIPIENT", "-", "CONTENT"],
         },
     ),
+
+    ### SEND
+    (
+        "send an email to Hugo",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+    (
+        "to Hugo send an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient send an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient send a message",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "send an email to receiver",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+
+    ### WRITE
+    (
+        "write an email to recipient",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+    (
+        "to Hugo write an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient write an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient write a message",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "write an email to receiver",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+
+
+    ### POST
+    (
+        "post an email to recipient",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+    (
+        "to Hugo post an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient post an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient post a message",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "post an email to receiver",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+
+    ### DISPATCH
+    (
+        "dispatch an email to recipient",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+    (
+        "to Hugo dispatch an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient dispatch an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient dispatch a message",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "dispatch an email to receiver",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+    
+    ### FORWARD
+    (
+        "forward an email to recipient",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+    (
+        "to Hugo forward an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient forward an email",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "to recipient forward a message",
+        {
+            "heads": [1, 4, 2, 4, 2],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "OBJECT"],
+        },
+    ),
+    (
+        "forward an email to receiver",
+        {
+            "heads": [0, 2, 0, 4, 2],  # index of token head
+            "deps": ["ROOT", "-", "OBJECT", "-", "RECIPIENT"],
+        },
+    ),
+    
 ]
 
