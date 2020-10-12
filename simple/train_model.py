@@ -6,7 +6,7 @@ import plac
 import random
 import spacy
 from pathlib import Path
-from spacy.util import minibatch, compounding
+from spacy.util import minibatch, compounding, decaying
 from datasets.training_data import TRAIN_DATA
 from datasets.test_data import TEST_DATA
 
@@ -15,6 +15,17 @@ def test_model(nlp, texts):
     for doc in docs:
         print(doc.text)
         print([(t.text, t.dep_, t.head.text) for t in doc if t.dep_ != "-"])
+
+def get_batches(train_data, model_type):
+    max_batch_sizes = {"tagger": 32, "parser": 16, "ner": 16, "textcat": 64}
+    max_batch_size = max_batch_sizes[model_type]
+    if len(train_data) < 1000:
+        max_batch_size /= 2
+    if len(train_data) < 500:
+        max_batch_size /= 2
+    batch_size = compounding(1, max_batch_size, 1.001)
+    batches = minibatch(train_data, size=batch_size)
+    return batches
 
 def train_model(model, output_dir, n_iter, train_data, test_data):
     """Load the model, set up the pipeline and train the parser."""
@@ -39,15 +50,16 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
     pipe_exceptions = ["parser", "trf_wordpiecer", "trf_tok2vec"]
     other_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptions]
     with nlp.disable_pipes(*other_pipes):  # only train parser
+        dropout = decaying(0.6, 0.2, 1e-4)
         optimizer = nlp.begin_training()
         for itn in range(n_iter):
             random.shuffle(train_data)
             losses = {}
             # batch up the examples using spaCy's minibatch
-            batches = minibatch(train_data, size=compounding(4.0, 32.0, 1.001))
+            batches = get_batches(train_data, "parser")
             for batch in batches:
                 texts, annotations = zip(*batch)
-                nlp.update(texts, annotations, sgd=optimizer, losses=losses)
+                nlp.update(texts, annotations, drop=next(dropout), sgd=optimizer, losses=losses)
             print("Losses", losses)
 
     # test the trained model
@@ -58,16 +70,16 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
         output_dir = Path(output_dir)
         if not output_dir.exists():
             output_dir.mkdir()
-        nlp.to_disk(output_dir)
+
+        with nlp.use_params(optimizer.averages):
+            nlp.to_disk(output_dir)
         print("Saved model to", output_dir)
 
         # test the saved model
         print("Loading from", output_dir)
         nlp2 = spacy.load(output_dir)
-        test_model(nlp2, train_data)
-        # test_model(nlp2)
+        test_model(nlp2, test_data)
 
 if __name__ == "__main__":
-    # train_model(None, './model', 15, TRAIN_DATA, TEST_DATA)
-    train_model(None, None, 15, TRAIN_DATA, TEST_DATA)
+    train_model(None, "./model", 15, TRAIN_DATA, TEST_DATA)
 
