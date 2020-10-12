@@ -4,7 +4,7 @@ TRAIN_DATA = [
     (
         "send an email to mark@email.com and greet him",
         {
-            "heads": [0, 2, 0, 4, 0, 6, 2, 4], 
+            "heads": [0, 2, 0, 4, 2, 6, 2, 4], 
             "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT", "-", "CONTENT", "-"],
         },
     ),
@@ -16,41 +16,48 @@ TRAIN_DATA = [
         },
     ),
     (
-        "write an email with a smile to friend@best.com",
+        "write an email with a smiley to friend@best.com",
         {
-            "heads": [0, 2, 0, 5, 5, 0, 7, 2],
+            "heads": [0, 2, 0, 5, 5, 2, 7, 2],
             "deps": ["VERB", "-", "NOUN", "-", "-", "CONTENT", "-", "RECIPIENT"],
         },
     ),
     (
         "write an email to hugo@microsoft.com and viktor@google.com",
         {
-            "heads": [0, 2, 0, 3, 3, 5, 3],
+            "heads": [0, 2, 0, 4, 2, 6, 2],
             "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT", "-", "RECIPIENT"],
         },
     ),
     (
-        "email Lars about today's weather",
+        "email Lars today's weather",
         {
-            "heads": [0, 0, 5, 5, 3, 0],  
-            "deps": ["VERB", "RECIPIENT", "-", "-", "-", "CONTENT"],
+            "heads": [0, 0, 4, 2, 0],  
+            "deps": ["VERB", "RECIPIENT", "-", "-", "CONTENT"],
         },
     ),
     (
-        "send an email to my boss about the meeting",
+        "send an email to my boss that I can't come today",
         {
-            "heads": [0, 2, 0, 5, 5, 2, 8, 8, 8],
-            "deps": ["VERB", "-", "NOUN", "-", "-", "RECIPIENT", "-", "-", "CONTENT"],
+            "heads": [0, 2, 0, 5, 5, 2, 2, 8, 10, 9, 11, 11],
+            "deps": ["VERB", "-", "NOUN", "-", "-", "RECIPIENT", "-", "-", "-", "-", "CONTENT", "-"],
         },
     ),
     (
-        "email Arash the agenda",
+        "email charlemagne@france.com if he can come tomorrow",
         {
-            "heads": [0, 2, 3, 0],
-            "deps": ["VERB", "RECIPIENT", "-", "CONTENT"],
+            "heads": [0, 0, 5, 1, 5, 5, 5],
+            "deps": ["VERB", "RECIPIENT", "-", "-", "-", "CONTENT", "-"],
         },
     ),
-
+    # This is not optimal, should be improved further
+    (
+        "write an email to Sigbjörn asking if yesterday's party was fun",
+        {
+            "heads": [0, 2, 0, 4, 2, 4, 11, 9, 7, 9, 7, 9],
+            "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT", "-", "-", "-", "-", "CONTENT", "-", "-"],
+        },
+    ),
     ### SEND
     (
         "send an email to Hugo",
