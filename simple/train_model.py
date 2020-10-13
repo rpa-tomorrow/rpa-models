@@ -64,8 +64,10 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
         # test the saved model
         print("Loading from", output_dir)
         nlp2 = spacy.load(output_dir)
-        test_model(nlp2)
+        test_model(nlp2, train_data)
+        # test_model(nlp2)
 
 if __name__ == "__main__":
+    # train_model(None, './model', 15, TRAIN_DATA, TEST_DATA)
     train_model(None, None, 15, TRAIN_DATA, TEST_DATA)
 
