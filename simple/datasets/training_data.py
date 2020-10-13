@@ -5,49 +5,49 @@ TRAIN_DATA = [
         "send an email to mark@email.com and greet him",
         {
             "heads": [0, 2, 0, 4, 2, 6, 2, 4], 
-            "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT", "-", "CONTENT", "-"],
+            "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT", "-", "BODY", "-"],
         },
     ),
     (
         "send an email to Mark",
         {
             "heads": [0, 2, 0, 4, 2],
-            "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT"],
+            "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT"],
         },
     ),
     (
         "write an email with a smiley to friend@best.com",
         {
             "heads": [0, 2, 0, 5, 5, 2, 7, 2],
-            "deps": ["VERB", "-", "NOUN", "-", "-", "CONTENT", "-", "RECIPIENT"],
+            "deps": ["ROOT", "-", "NOUN", "-", "-", "BODY", "-", "RECIPIENT"],
         },
     ),
     (
         "write an email to hugo@microsoft.com and viktor@google.com",
         {
             "heads": [0, 2, 0, 4, 2, 6, 2],
-            "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT", "-", "RECIPIENT"],
+            "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT", "-", "RECIPIENT"],
         },
     ),
     (
         "email Lars today's weather",
         {
             "heads": [0, 0, 4, 2, 0],  
-            "deps": ["VERB", "RECIPIENT", "-", "-", "CONTENT"],
+            "deps": ["ROOT", "RECIPIENT", "BODY", "BODY", "BODY"],
         },
     ),
     (
         "send an email to my boss that I can't come today",
         {
             "heads": [0, 2, 0, 5, 5, 2, 2, 8, 10, 9, 11, 11],
-            "deps": ["VERB", "-", "NOUN", "-", "-", "RECIPIENT", "-", "-", "-", "-", "CONTENT", "-"],
+            "deps": ["ROOT", "-", "NOUN", "-", "-", "RECIPIENT", "-", "BODY", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
     (
         "email charlemagne@france.com if he can come tomorrow",
         {
             "heads": [0, 0, 5, 1, 5, 5, 5],
-            "deps": ["VERB", "RECIPIENT", "-", "-", "-", "CONTENT", "-"],
+            "deps": ["ROOT", "RECIPIENT", "BODY", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
     # This is not optimal, should be improved further
@@ -55,7 +55,14 @@ TRAIN_DATA = [
         "write an email to Sigbjörn asking if yesterday's party was fun",
         {
             "heads": [0, 2, 0, 4, 2, 4, 11, 9, 7, 9, 7, 9],
-            "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT", "-", "-", "-", "-", "CONTENT", "-", "-"],
+            "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT", "-", "BODY", "BODY", "BODY", "BODY", "BODY", "BODY"],
+        },
+    ),
+    (
+        "write Hello world in an email to hugo@mail.com",
+        {
+            "heads": [0, 5, 1, 5, 5, 0, 7, 0],
+            "deps": ["ROOT", "BODY", "BODY", "-", "-", "NOUN", "-", "RECIPIENT"],
         },
     ),
     ### SEND
@@ -63,35 +70,35 @@ TRAIN_DATA = [
         "send an email to Hugo",
         {
             "heads": [0, 2, 0, 4, 2],  # index of token head
-            "deps": ["VERB", "-", "NOUN", "-", "RECIPIENT"],
+            "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT"],
         },
     ),
     (
         "to Hugo send an email",
         {
             "heads": [1, 4, 2, 4, 2],  # index of token head
-            "deps": ["-", "RECIPIENT", "VERB", "-", "NOUN"],
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
         },
     ),
     (
         "to recipient send an email",
         {
             "heads": [1, 4, 2, 4, 2],  # index of token head
-            "deps": ["-", "RECIPIENT", "VERB", "-", "NOUN"],
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
         },
     ),
     (
         "to recipient send a message",
         {
             "heads": [1, 4, 2, 4, 2],  # index of token head
-            "deps": ["-", "RECIPIENT", "VERB", "-", "NOUN"],
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
         },
     ),
     (
         "send an email to receiver",
         {
             "heads": [0, 2, 0, 4, 2],  # index of token head
-            "deps": ["VERB", "-", "CONTENT", "-", "RECIPIENT"],
+            "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT"],
         },
     ),
     ### WRITE
@@ -127,47 +134,9 @@ TRAIN_DATA = [
         "write an email to receiver",
         {
             "heads": [0, 2, 0, 4, 2],  # index of token head
-            "deps": ["ROOT", "-", "CONTENT", "-", "RECIPIENT"],
+            "deps": ["ROOT", "-", "BODY", "-", "RECIPIENT"],
         },
     ),
-
-    # ### WRITE
-    # (
-    #     "write an email to recipient",
-    #     {
-    #         "heads": [0, 2, 0, 4, 2],  # index of token head
-    #         "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT"],
-    #     },
-    # ),
-    # (
-    #     "to Hugo write an email",
-    #     {
-    #         "heads": [1, 4, 2, 4, 2],  # index of token head
-    #         "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
-    #     },
-    # ),
-    # (
-    #     "to recipient write an email",
-    #     {
-    #         "heads": [1, 4, 2, 4, 2],  # index of token head
-    #         "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
-    #     },
-    # ),
-    # (
-    #     "to recipient write a message",
-    #     {
-    #         "heads": [1, 4, 2, 4, 2],  # index of token head
-    #         "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
-    #     },
-    # ),
-    # (
-    #     "write an email to receiver",
-    #     {
-    #         "heads": [0, 2, 0, 4, 2],  # index of token head
-    #         "deps": ["ROOT", "-", "CONTENT", "-", "RECIPIENT"],
-    #     },
-    # ),
-
     ### POST
     (
         "post an email to recipient",
@@ -204,7 +173,6 @@ TRAIN_DATA = [
             "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT"],
         },
     ),
-
     ### DISPATCH
     (
         "dispatch an email to recipient",
@@ -240,8 +208,7 @@ TRAIN_DATA = [
             "heads": [0, 2, 0, 4, 2],  # index of token head
             "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT"],
         },
-    ),
-    
+    ),   
     ### FORWARD
     (
         "forward an email to recipient",
@@ -373,4 +340,12 @@ TRAIN_DATA = [
             "deps": ["-", "-", "ROOT", "-", "TIME", "-", "-", "NOUN", "-", "-", "CONTENT"],
         },
     ),
+    (
+        "remind me at 14.00 with the message Hello",
+        {
+            "heads": [0, 0, 3, 0, 6, 6, 0, 7],
+            "deps": ["ROOT", "RECIPIENT", "-", "WHEN", "-", "-", "NOUN", "BODY"],
+        },
+    ),
+    ## Calendar
 ]
