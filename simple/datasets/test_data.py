@@ -3,7 +3,6 @@ TEST_DATA = [
     "email today's date to aron@bing.com",
     "write an email to gustav@google.com",
     "email Viktor about the meeting"
-
     "Remind me at eight about subject",
     "Remind Hugo at eleven about meeting",
     "Remind Albin at 18.00 about meetup",
@@ -15,4 +14,5 @@ TEST_DATA = [
     "Alarm me in four hours about subject",
     "Set alarm me at 11.00 about lunch",
     "Set an alarm in 2 hours that I have a meeting",
+    "send an email to Mark and attach text.txt",
 ]

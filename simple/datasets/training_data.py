@@ -131,6 +131,42 @@ TRAIN_DATA = [
         },
     ),
 
+    # ### WRITE
+    # (
+    #     "write an email to recipient",
+    #     {
+    #         "heads": [0, 2, 0, 4, 2],  # index of token head
+    #         "deps": ["ROOT", "-", "NOUN", "-", "RECIPIENT"],
+    #     },
+    # ),
+    # (
+    #     "to Hugo write an email",
+    #     {
+    #         "heads": [1, 4, 2, 4, 2],  # index of token head
+    #         "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
+    #     },
+    # ),
+    # (
+    #     "to recipient write an email",
+    #     {
+    #         "heads": [1, 4, 2, 4, 2],  # index of token head
+    #         "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
+    #     },
+    # ),
+    # (
+    #     "to recipient write a message",
+    #     {
+    #         "heads": [1, 4, 2, 4, 2],  # index of token head
+    #         "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
+    #     },
+    # ),
+    # (
+    #     "write an email to receiver",
+    #     {
+    #         "heads": [0, 2, 0, 4, 2],  # index of token head
+    #         "deps": ["ROOT", "-", "CONTENT", "-", "RECIPIENT"],
+    #     },
+    # ),
 
     ### POST
     (
