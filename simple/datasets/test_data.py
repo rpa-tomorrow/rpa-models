@@ -11,4 +11,8 @@ TEST_DATA = [
     "At two set reminder for John about meeting"
     "Set a reminder at three for John about meetup"
     "Set me a reminder at three about subject",
+    "Remind me in 2 hours that I need to go grab lunch",
+    "Alarm me in four hours about subject",
+    "Set alarm me at 11.00 about lunch",
+    "Set an alarm in 2 hours that I have a meeting",
 ]

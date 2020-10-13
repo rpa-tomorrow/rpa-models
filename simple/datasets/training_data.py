@@ -244,12 +244,19 @@ TRAIN_DATA = [
     ),
 
 
-    ### REMINDER
+    # ### REMINDER
     (
         "Remind me at eight about subject",
         {
             "heads": [0, 0, 3, 1, 5, 3], 
             "deps": ["ROOT", "NOUN", "-", "TIME", "-", "CONTENT"],
+        },
+    ),
+    (
+        "Alarm me in four hours about subject",
+        {
+            "heads": [0, 0, 3, 1, 3, 6, 3], 
+            "deps": ["ROOT", "NOUN", "-", "TIME", "-", "-", "CONTENT"],
         },
     ),
     (
@@ -281,13 +288,20 @@ TRAIN_DATA = [
         },
     ),
     (
+        "Set alarm me at 11.00 about lunch",
+        {
+            "heads": [1, 1, 1, 4, 2, 6, 4], 
+            "deps": ["-", "ROOT", "NOUN", "-", "TIME", "-", "CONTENT"],
+        },
+    ),
+    (
         "Set reminder at one about meetup",
         {
             "heads": [1, 1, 3, 1, 5, 1], 
             "deps": ["-", "ROOT", "-", "TIME", "-", "CONTENT"],
         },
     ),
-    ### Iffy sentences
+    ### Harder sentences
     (
         "At two set a reminder for John about meeting",
         {
@@ -309,5 +323,18 @@ TRAIN_DATA = [
             "deps": ["-", "NOUN", "-", "ROOT", "-", "TIME", "-", "CONTENT"],
         },
     ),
+    (
+        "Remind me in 2 hours that I need to go grab lunch",
+        {
+            "heads": [0, 0, 3, 1, 3, 6, 7, 8, 9, 10, 11, 3], 
+            "deps": ["ROOT", "NOUN", "-", "TIME", "-", "-", "-", "-", "-", "-", "-", "CONTENT"],
+        },
+    ),
+    (
+          "Set an alarm in 2 hours that I have a meeting",
+        {
+            "heads": [1, 2, 2, 4, 7, 4, 7, 2, 9, 10, 4], 
+            "deps": ["-", "-", "ROOT", "-", "TIME", "-", "-", "NOUN", "-", "-", "CONTENT"],
+        },
+    ),
 ]
-
