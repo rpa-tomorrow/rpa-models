@@ -59,9 +59,12 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
             batches = get_batches(train_data, "parser")
             for batch in batches:
                 texts, annotations = zip(*batch)
-                nlp.update(texts, annotations, 
-                # drop=next(dropout), 
-                sgd=optimizer, losses=losses)
+                nlp.update(
+                    texts, 
+                    annotations, 
+                    #drop=next(dropout), 
+                    sgd=optimizer, 
+                    losses=losses)
             print("Losses", losses)
 
     # test the trained model
