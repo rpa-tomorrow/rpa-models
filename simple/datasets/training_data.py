@@ -44,10 +44,10 @@ TRAIN_DATA = [
         },
     ),
     (
-        "email charlemagne@france.com if he can come tomorrow",
+        "email charlemagne@france.com asking if he can come tomorrow",
         {
-            "heads": [0, 0, 5, 1, 5, 5, 5],
-            "deps": ["ROOT", "RECIPIENT", "BODY", "BODY", "BODY", "BODY", "BODY"],
+            "heads": [0, 0, 6, 1, 3, 6, 6, 6],
+            "deps": ["ROOT", "RECIPIENT", "VERB", "BODY", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
     # This is not optimal, should be improved further
@@ -110,10 +110,10 @@ TRAIN_DATA = [
         },
     ),
     (
-        "to Hugo write an email",
+        "to Hugo write an email with tomorrow's weather",
         {
-            "heads": [1, 4, 2, 4, 2],  # index of token head
-            "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN"],
+            "heads": [1, 4, 2, 4, 2, 6, 8, 6, 4],  # index of token head
+            "deps": ["-", "RECIPIENT", "ROOT", "-", "NOUN", "-", "BODY", "BODY", "BODY"],
         },
     ),
     (
