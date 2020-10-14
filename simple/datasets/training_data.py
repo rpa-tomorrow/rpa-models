@@ -42,14 +42,14 @@ TRAIN_DATA = [
     (
         "send an email to my boss that I can't come today",
         {
-            "heads": [0, 2, 0, 5, 5, 2, 2, 8, 10, 9, 11, 11],
+            "heads": [0, 2, 0, 5, 5, 2, 2, 8, 10, 9, 2, 10],
             "deps": ["ROOT", "-", "NOUN", "-", "-", "TO", "-", "BODY", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
     (
         "email charlemagne@france.com asking if he can come tomorrow",
         {
-            "heads": [0, 0, 6, 1, 3, 6, 6, 6],
+            "heads": [0, 0, 6, 1, 3, 6, 0, 6],
             "deps": ["ROOT", "TO", "VERB", "BODY", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
@@ -57,14 +57,14 @@ TRAIN_DATA = [
     (
         "write an email to Sigbjörn asking if yesterday's party was fun",
         {
-            "heads": [0, 2, 0, 4, 2, 4, 11, 9, 7, 9, 7, 9],
+            "heads": [0, 2, 0, 4, 2, 4, 11, 9, 7, 2, 7, 9],
             "deps": ["ROOT", "-", "NOUN", "-", "TO", "-", "BODY", "BODY", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
     (
         "write Hello world in an email to hugo@mail.com",
         {
-            "heads": [0, 5, 1, 5, 5, 0, 7, 0],
+            "heads": [0, 2, 5, 5, 5, 0, 7, 0],
             "deps": ["ROOT", "BODY", "BODY", "-", "-", "NOUN", "-", "TO"],
         },
     ),
@@ -77,10 +77,10 @@ TRAIN_DATA = [
         },
     ),
     (
-        "to Hugo send an email",
+        "to Hugo send an email at 15.57",
         {
-            "heads": [1, 4, 2, 4, 2],  # index of token head
-            "deps": ["-", "TO", "ROOT", "-", "NOUN"],
+            "heads": [1, 4, 2, 4, 2, 6, 4],  # index of token head
+            "deps": ["-", "TO", "ROOT", "-", "NOUN", "-", "WHEN"],
         },
     ),
     (
@@ -250,71 +250,169 @@ TRAIN_DATA = [
     ),
 
 
-    # ### REMINDER
-    #(
-    #    "Remind me at eight about subject",
-    #    {
-    #        "heads": [0, 0, 3, 0, 5, 0], 
-    #        "deps": ["ROOT", "TO", "-", "WHEN", "-", "BODY"],
-    #    },
-    #),
-    #(
-    #    "Alarm me in four hours about subject",
-    #    {
-    #        "heads": [0, 0, 3, 0, 3, 6, 0], 
-    #        "deps": ["ROOT", "TO", "-", "WHEN", "WHEN", "-", "BODY"],
-    #    },
-    #),
-    #(
-    #    "Remind Hugo at seven about meeting",
-    #    {
-    #        "heads": [0, 0, 3, 0, 5, 0], 
-    #        "deps": ["ROOT", "TO", "-", "WHEN", "-", "BODY"],
-    #    },
-    #),
-    #(
-    #    "Remind Albin at 18.00 about meetup",
-    #    {
-    #        "heads": [0, 0, 3, 0, 5, 0], 
-    #        "deps": ["ROOT", "TO", "-", "WHEN", "-", "BODY"],
-    #    },
-    #),
-    #(
-    #    "Set reminder at 19.00 about meeting",
-    #    {
-    #        "heads": [0, 0, 3, 1, 5, 0], 
-    #        "deps": ["ROOT", "NOUN", "-", "WHEN", "-", "BODY"],
-    #    },
-    #),
-    #(
-    #    "Set reminder at eleven about subject",
-    #    {
-    #        "heads": [0, 0, 3, 1, 5, 0], 
-    #        "deps": ["ROOT", "NOUN", "-", "WHEN", "-", "BODY"],
-    #    },
-    #),
-    #(
-    #    "Set alarm me at 11.00 about lunch",
-    #    {
-    #        "heads": [0, 0, 1, 4, 1, 6, 1], 
-    #        "deps": ["ROOT", "NOUN", "TO", "-", "WHEN", "-", "BODY"],
-    #    },
-    #),
-    #(
-    #    "Set reminder at one about meetup",
-    #    {
-    #        "heads": [0, 0, 3, 1, 5, 1], 
-    #        "deps": ["ROOT", "NOUN", "-", "WHEN", "-", "BODY"],
-    #    },
-    #),
+    ### REMINDER
+    (
+        "Remind me at eight",
+        {
+            "heads": [0, 0, 3, 0], 
+            "deps": ["ROOT", "TO", "-", "WHEN"],
+        },
+    ),
+    (
+        "At 2 notify me",
+        {
+            "heads": [1, 2, 2, 2],
+            "deps": ["-", "WHEN", "ROOT", "TO"],
+        },
+    ),
+    (
+        "Alarm me in four hours",
+        {
+            "heads": [0, 0, 3, 0, 3], 
+            "deps": ["ROOT", "TO", "-", "WHEN", "WHEN"],
+        },
+    ),
+    (
+        "Remind Hugo at 7 pm",
+        {
+            "heads": [0, 0, 3, 0, 3], 
+            "deps": ["ROOT", "TO", "-", "WHEN", "WHEN"],
+        },
+    ),
+    (
+        "Notify Albin at 18.00",
+        {
+            "heads": [0, 0, 3, 0], 
+            "deps": ["ROOT", "TO", "-", "WHEN"],
+        },
+    ),
+    (
+        "set a notification at 10",
+        {
+            "heads": [0, 2, 0, 4, 0],
+            "deps": ["ROOT", "-", "NOUN", "-", "WHEN"],
+        },
+    ),
+    (
+        "Set reminder at 19.00",
+        {
+            "heads": [0, 0, 3, 1], 
+            "deps": ["ROOT", "NOUN", "-", "WHEN"],
+        },
+    ),
+    (
+        "Set a reminder at eleven to eat more vegetables",
+        {
+            "heads": [0, 1, 0, 4, 2, 6, 2, 8, 6], 
+            "deps": ["ROOT", "-", "NOUN", "-", "WHEN", "-", "BODY", "BODY", "BODY"],
+        },
+    ),
+    (
+        "Set an alarm for me at 11.00",
+        {
+            "heads": [0, 1, 0, 4, 2, 6, 2], 
+            "deps": ["ROOT", "-", "NOUN", "-", "TO", "-", "WHEN"],
+        },
+    ),
+    (
+        "Set a reminder at one with the text go to work",
+        {
+            "heads": [0, 1, 0, 4, 2, 7, 7, 8, 2, 10, 8], 
+            "deps": ["ROOT", "-", "NOUN", "-", "WHEN", "-", "-", "NOUN", "BODY", "BODY", "BODY"],
+        },
+    ),
+    (
+        "after 5 hours notify me",
+        {
+            "heads": [1, 3, 1, 3, 3],
+            "deps": ["-", "WHEN", "WHEN", "ROOT", "TO"],
+        },
+    ),
+    (
+        "notify me at 1 am to walk the dog",
+        {
+            "heads": [0, 0, 3, 0, 3, 6, 0, 8, 6],
+            "deps": ["ROOT", "TO", "-", "WHEN", "WHEN", "-", "BODY", "BODY", "BODY"],
+        },
+    ),
+    (
+        "in 120 seconds notify me the time",
+        {
+            "heads": [1, 3, 1, 3, 3, 6, 3],
+            "deps": ["-", "WHEN", "WHEN", "ROOT", "TO", "-", "BODY"],
+        },
+    ),
+    (
+        "set an alarm after 20 seconds",
+        {
+            "heads": [0, 2, 0, 4, 2, 4],
+            "deps": ["ROOT", "-", "NOUN", "-", "WHEN", "WHEN"],
+        },
+    ),
+    (
+        "alarm me in 15 minutes",
+        {
+            "heads": [0, 0, 3, 0, 3],
+            "deps": ["ROOT", "TO", "-", "WHEN", "WHEN"],
+        },
+    ),
+    (
+        "remind me in one minute with the text good day",
+        {
+            "heads": [0, 0, 3, 0, 3, 6, 7, 8, 0, 8],
+            "deps": ["ROOT", "TO", "-", "WHEN", "WHEN", "-", "-", "NOUN", "BODY", "BODY"]
+        },
+    ),
+    (
+        "warn me when the time is 20.15",
+        {
+            "heads": [0, 0, 4, 4, 0, 6, 0],
+            "deps": ["ROOT", "TO", "-", "-", "NOUN", "-", "WHEN"]
+        },
+    ),
     #### Harder sentences
-    #(
-    #    "At two set a reminder for John about meeting",
-    #    {
-    #        "heads": [1, 4, 2, 4, 2, 6, 4, 8, 4], 
-    #        "deps": ["-", "WHEN", "ROOT", "-", "NOUN", "-", "TO", "-", "BODY"],
-    #    },
-    #),
+    (
+        "At two set a reminder for John to meet me",
+        {
+            "heads": [1, 4, 2, 4, 2, 6, 4, 8, 4, 8, 4, 8], 
+            "deps": ["-", "WHEN", "ROOT", "-", "NOUN", "-", "TO", "-", "BODY", "BODY"],
+        },
+    ),
+    (
+        "In ten hours remind me the today's date",
+        {
+            "heads": [1, 3, 1, 3, 3, 6, 8, 6, 3], 
+            "deps": ["-", "WHEN", "WHEN", "ROOT", "TO", "-", "BODY", "BODY", "BODY"],
+        },
+    ),
+    (
+        "at 23.22 notify me the tomorrow's weather",
+        {
+            "heads": [1, 2, 2, 2, 5, 7, 5, 2],
+            "deps": ["-", "WHEN", "ROOT", "TO", "-", "BODY", "BODY", "BODY"],
+        },
+    ),
+    (
+        "Remind Tom at 3 am to go home",
+        {
+            "heads": [0, 0, 3, 0, 3, 6, 0, 6],
+            "deps": ["ROOT", "TO", "-", "WHEN", "WHEN", "-", "BODY", "BODY"],
+        },
+    ),
+    (
+        "remind me to clean the desk at 13.28",
+        {
+            "heads": [0, 0, 3, 4, 5, 0, 7, 0],
+            "deps": ["ROOT", "TO", "-", "BODY", "BODY", "BODY", "-", "WHEN"],
+        },
+    ),
+    (
+        "notify me that I am stupid",
+        {
+            "heads": [0, 0, 3, 4, 5, 0],
+            "deps": ["ROOT", "TO", "-", "BODY", "BODY", "BODY"],
+        },
+    ),
     (
         "Set a reminder at 11 pm for John",
         {
@@ -332,28 +430,28 @@ TRAIN_DATA = [
     (
         "set a reminder at 15.39 with the text Nice",
         {
-            "heads": [0, 2, 0, 4, 2, 7, 7, 2, 7],
+            "heads": [0, 2, 0, 4, 2, 7, 7, 8, 2],
             "deps": ["ROOT", "-", "NOUN", "-", "WHEN", "-", "-", "NOUN", "BODY"],
         },
     ),
     (
-        "Remind me in 2 hours that I need to go grab lunch",
+        "Remind me in 4 hours that I need to go grab lunch",
         {
-            "heads": [0, 0, 3, 1, 3, 6, 7, 8, 9, 10, 11, 11], 
+            "heads": [0, 0, 3, 1, 3, 6, 7, 8, 9, 10, 0, 10], 
             "deps": ["ROOT", "TO", "-", "WHEN", "WHEN", "-", "BODY", "BODY", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
     (
-        "Set an alarm in 2 hours that I have a meeting",
+        "Set an alarm in 2 minutes that I have a meeting",
         {
-            "heads": [0, 2, 0, 4, 7, 4, 7, 2, 9, 10, 4], 
+            "heads": [0, 2, 0, 4, 7, 4, 7, 2, 9, 10, 2], 
             "deps": ["ROOT", "-", "NOUN", "-", "WHEN", "WHEN", "-", "BODY", "BODY", "BODY", "BODY"],
         },
     ),
     (
         "remind me at 14.00 with the message Hello",
         {
-            "heads": [0, 0, 3, 0, 6, 6, 1, 7],
+            "heads": [0, 0, 3, 0, 6, 6, 7, 0],
             "deps": ["ROOT", "TO", "-", "WHEN", "-", "-", "NOUN", "BODY"],
         },
     ),

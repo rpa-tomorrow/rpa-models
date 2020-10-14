@@ -56,7 +56,8 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
             random.shuffle(train_data)
             losses = {}
             # batch up the examples using spaCy's minibatch
-            batches = get_batches(train_data, "parser")
+            #batches = get_batches(train_data, "parser")
+            batches = minibatch(TRAIN_DATA, size=compounding(4.0, 32.0, 1.001))
             for batch in batches:
                 texts, annotations = zip(*batch)
                 nlp.update(
@@ -86,6 +87,7 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
         test_model(nlp2, test_data)
 
 if __name__ == "__main__":
-    train_model(None, None, 15, TRAIN_DATA, TEST_DATA)
-    # train_model(None, "./model", 15, TRAIN_DATA, TEST_DATA)
+    #train_model(None, None, 16, TRAIN_DATA, TEST_DATA)
+    # train_model("en_core_web_sm", None, 15, TRAIN_DATA, TEST_DATA)
+    train_model(None, "./model", 12, TRAIN_DATA, TEST_DATA)
 

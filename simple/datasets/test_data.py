@@ -1,6 +1,6 @@
 TEST_DATA = [
     "send an email to Kevin",
-    "email today's date to aron@bing.com",
+    "email the today's date to aron@bing.com",
     "write an email to gustav@google.com",
     "Remind me in 2 hours that I need to go grab lunch",
     "Set an alarm in 2 hours that I have a meeting",
