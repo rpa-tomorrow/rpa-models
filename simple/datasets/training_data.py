@@ -1,8 +1,25 @@
 # training data: texts, heads and dependency labels
 # for no relation, we simply chose an arbitrary dependency label, e.g. '-'
+#
+# Labels: [ROOT, NOUN, TO, WHEN, BODY]
+#
+# The following dataset follows the following dependency ordering.
+# The ordering has priority here
 # ROOT -> ROOT
 # NOUN -> ROOT
-# TO -> NOUN
+# TO -> NOUN/ROOT 
+#   (if NOUN: connect to NOUN, else: connect to ROOT)
+#   e.g. "email me": me -> email
+#        "send email to me": me -> email
+# BODY -> BODY/NOUN/ROOT 
+#   main BODY connects to NOUN or ROOT
+#   supporting BODY connects to main BODY
+#   e.g. "remind me to go outside": go -> remind, outside -> go
+# WHEN -> WHEN/NOUN/ROOT
+#   main WHEN connects to NOUN or ROOT
+#   supporting WHEN connects to main WHEN
+#   e.g. "remind me in two hours": two -> remind, hours -> two
+
 TRAIN_DATA = [
     (
         "send an email to mark@email.com and greet him",
