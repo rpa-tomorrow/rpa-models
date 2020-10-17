@@ -1,7 +1,7 @@
 TEST_DATA = [
     "send an email to kevin@gmail.com",
     "Remind me at 20.00",
-    # "Check if Kevin is available at 16.00",
+    "Check if Kevin is available at 16.00",
     # "email the today's date to aron@bing.com",
     # "write an email to gustav@google.com",
     # "Remind me in 2 hours that I need to go grab lunch",

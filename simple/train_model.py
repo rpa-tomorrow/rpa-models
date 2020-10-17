@@ -88,11 +88,11 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
         test_model(nlp2, test_data)
 
 if __name__ == "__main__":
-    # for val in TEST_DATA:
-    #     print(val)
-        # modelSelectorTest("Check if Kevin is available at 16.00")
+    for val in TEST_DATA:
+        print(val)
+        res = modelSelectorTest(val)
+        print("res = " + res[4])
 
-    modelSelectorTest("hello world")
 
     # train_model(None, None, 16, TRAIN_DATA, TEST_DATA)
     # train_model("en_core_web_sm", None, 15, TRAIN_DATA, TEST_DATA)
