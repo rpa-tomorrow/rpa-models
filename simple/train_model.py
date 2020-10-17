@@ -8,6 +8,7 @@ import spacy
 from pathlib import Path
 from spacy.util import minibatch, compounding, decaying
 from datasets.training_data import TRAIN_DATA
+from datasets.model_selector import modelSelectorTest
 from datasets.test_data import TEST_DATA
 
 def test_model(nlp, texts):
@@ -87,7 +88,12 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
         test_model(nlp2, test_data)
 
 if __name__ == "__main__":
-    #train_model(None, None, 16, TRAIN_DATA, TEST_DATA)
-    # train_model("en_core_web_sm", None, 15, TRAIN_DATA, TEST_DATA)
-    train_model(None, "./model", 12, TRAIN_DATA, TEST_DATA)
+    # for val in TEST_DATA:
+    #     print(val)
+        # modelSelectorTest("Check if Kevin is available at 16.00")
 
+    modelSelectorTest("hello world")
+
+    # train_model(None, None, 16, TRAIN_DATA, TEST_DATA)
+    # train_model("en_core_web_sm", None, 15, TRAIN_DATA, TEST_DATA)
+    # train_model(None, "./model", 12, TRAIN_DATA, TEST_DATA)
