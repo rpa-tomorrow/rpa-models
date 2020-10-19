@@ -1,3 +1,6 @@
+### -*- encoding: utf-8 -*-
+
+import os.path
 import spacy
 from spacy.vocab import Vocab
 import numpy as np
@@ -6,6 +9,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from tqdm import tqdm
+from train_data import TRAIN_DATA
 
 class Seq2Seq(nn.Module):
     def __init__(self, embedding_size, hidden_size):
@@ -96,38 +100,47 @@ if __name__ == "__main__":
     num_steps = 10 # the number of words that can appear in sequence.
     embedding_size = 300 # the size of vectors, spaCy uses 300 dimensions for their embeddings.
     hidden_size = 512 # size of the hidden state in RNN, chosen arbitrarily.
-
+    batch_size = 10
+    
     # Find device, 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Using device: " + torch.cuda.get_device_name(0) if torch.cuda.is_available() else "CPU");
-    
-    # Seting up the dataset
+
+    # Load training dataset from train_data.py
+    train_len = len(TRAIN_DATA)
+    batch_size = min(batch_size, train_len)
+    dataset_inputs  = [None]*train_len
+    dataset_outputs = [None]*train_len
+    for i in range(train_len):
+        dataset_inputs[i]  = TRAIN_DATA[i][0]
+        dataset_outputs[i] = TRAIN_DATA[i][1]
+
+    # Load the vocabulary and its word2vec embeddings
     nlp = spacy.load("en_core_web_md")
     vocab_subset = Vocab() # store local vocabulary to improve output
-    dataset_inputs  = ["Email alemen-6@student.ltu.se saying Hello world.",
-                       "Send email to my friend, I'm sick I cannot come to school.",
-                       "I am about 15 minutes late for work, send email to my colleagues.",
-                       "Remind me tomorrow at 8am to take out the trash.",
-                       "I have an appointment with the dentist next week on monday at 5pm.",
-                       "Schedule meeting on friday with my team."]
-    dataset_outputs = ["email <TO> alemen-6@student.ltu.se <BODY> Hello world!",
-                       "email <TO> my friend <BODY> I'm sick I cannot come to school.",
-                       "email <TO> my colleagues <BODY> I am about 15 minutes late for work.",
-                       "remind <TO> me <WHEN> 8am tomorrow <BODY> Take out the trash.",
-                       "remind <TO> me <WHEN> next week, monday, 5pm <BODY> Dentist appointment.",
-                       "remind <TO> my team <WHEN> friday <BODY> Meeting."]
+    vocab_builtin = Vocab()
+    vocab_builtin_path = "vocab_builtin"
+    if os.path.exists(vocab_builtin_path):
+        vocab_builtin = Vocab().from_disk(vocab_builtin_path)
+        print("Created vocabulary file for builtin vectors (" + vocab_builtin_path + ")")
+    else:
+        # Add custom vectors for tagging stuff
+        keywords = {
+            "<START>": np.random.uniform(-1, 1, (300,)),
+            "<END>":   np.random.uniform(-1, 1, (300,)),
+            "<TO>":    np.random.uniform(-1, 1, (300,)),
+            "<WHEN>":  np.random.uniform(-1, 1, (300,)),
+            "<BODY>":  np.random.uniform(-1, 1, (300,)),
+            "<PAD>":   np.random.uniform(-1, 1, (300,)),
+            "<AND>":   np.random.uniform(-1, 1, (300,))
+        }
+        for word, vector in keywords.items():
+            vocab_builtin.set_vector(word, vector)
+        vocab_builtin.to_disk(vocab_builtin_path)
 
-    # Add custom vectors for tagging stuff
-    keywords = {"<START>": np.random.uniform(-1, 1, (300,)),
-                "<END>": np.random.uniform(-1, 1, (300,)),
-                "<TO>": np.random.uniform(-1, 1, (300,)),
-                "<WHEN>": np.random.uniform(-1, 1, (300,)),
-                "<BODY>": np.random.uniform(-1, 1, (300,)),
-                "<PAD>": np.random.uniform(-1, 1, (300,))}
-    for word, vector in keywords.items():
-        nlp.vocab.set_vector(word, vector)
-        vocab_subset.set_vector(word, vector)
-    # TODO(alexander): These needs to be stored so we can interpret future uses of this model
+    for lex in vocab_builtin:
+        nlp.vocab.set_vector(lex.word, lex.vector)
+        vocab_subset.set_vector(lex.word, lex.vector)
 
     # Separate dataset outputs (inputs to decoder) and its target
     dataset_targets = []
@@ -160,8 +173,8 @@ if __name__ == "__main__":
         pbar = tqdm(range(num_epochs))
         for epoch in pbar:
             l = len(input_vectors)
-            # Pick a random sample from the training set
-            # idx = epoch % len(input_vectors)
+            # Pick a random samples from the training set
+            np.random.choice(train_len, batch_size, replace=False)
             inputs = torch.FloatTensor(input_vectors[:l]).to(device)
             hidden = torch.FloatTensor(torch.zeros(1, l, hidden_size)).to(device)
             outputs = torch.FloatTensor(output_vectors[:l]).to(device)
@@ -192,8 +205,8 @@ if __name__ == "__main__":
     if True:
         print("Testing the model:")
         examples = ["Send email to my friend saying I am sick.",
-                    "Remind me to join zoom meeting at 6pm today.",
-                    "Set alarm tomorrow at 8am.",
+                    "Remind me to join zoom meeting at 6 today.",
+                    "Set alarm tomorrow at 8.",
                     "I'm late for work today notify my colleagues."]
         
         model = model.to(device)
