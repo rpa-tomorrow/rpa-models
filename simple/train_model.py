@@ -5,11 +5,9 @@ from __future__ import unicode_literals, print_function
 import plac
 import random
 import spacy
+import glob, importlib, os, pathlib, sys
 from pathlib import Path
 from spacy.util import minibatch, compounding, decaying
-from datasets.training_data import TRAIN_DATA
-from datasets.model_selector import modelSelectorTest
-from datasets.test_data import TEST_DATA
 
 def test_model(nlp, texts):
     docs = nlp.pipe(texts)
@@ -28,7 +26,29 @@ def get_batches(train_data, model_type):
     batches = minibatch(train_data, size=batch_size)
     return batches
 
-def train_model(model, output_dir, n_iter, train_data, test_data):
+def get_datasets(name):
+    module_base= "datasets."
+    train_base = name + "." + "training_data"
+    test_base = name + "." + "test_data"
+
+    train_mod = __import__(module_base + train_base)
+    test_mod = __import__(module_base + test_base)
+
+    if name == "email":
+        return (train_mod.email.training_data.TRAIN_DATA, test_mod.email.test_data.TEST_DATA)
+    elif name == "reminder":
+        return (train_mod.reminder.training_data.TRAIN_DATA, test_mod.reminder.test_data.TEST_DATA)
+    else:
+        raise Exception("Could not find dataset directory with the name ", name)
+
+@plac.annotations(
+    dataset=("Name of the directory for the dataset to use", "option", "d", str),
+    model=("Model name. Defaults to blank 'en' model.", "option", "m", str),
+    output_dir=("Optional output directory", "option", "o", Path),
+    n_iter=("Number of training iterations", "option", "n", int),
+)
+def train_model(dataset, model=None, output_dir=None, n_iter=15):
+    train_data, test_data = get_datasets(dataset)
     """Load the model, set up the pipeline and train the parser."""
     if model is not None:
         nlp = spacy.load(model)  # load existing spaCy model
@@ -58,7 +78,7 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
             losses = {}
             # batch up the examples using spaCy's minibatch
             #batches = get_batches(train_data, "parser")
-            batches = minibatch(TRAIN_DATA, size=compounding(4.0, 32.0, 1.001))
+            batches = minibatch(train_data, size=compounding(4.0, 32.0, 1.001))
             for batch in batches:
                 texts, annotations = zip(*batch)
                 nlp.update(
@@ -88,12 +108,4 @@ def train_model(model, output_dir, n_iter, train_data, test_data):
         test_model(nlp2, test_data)
 
 if __name__ == "__main__":
-    for val in TEST_DATA:
-        print(val)
-        res = modelSelectorTest(val)
-        print("res = " + res[4])
-
-
-    # train_model(None, None, 16, TRAIN_DATA, TEST_DATA)
-    # train_model("en_core_web_sm", None, 15, TRAIN_DATA, TEST_DATA)
-    # train_model(None, "./model", 12, TRAIN_DATA, TEST_DATA)
+    plac.call(train_model)
