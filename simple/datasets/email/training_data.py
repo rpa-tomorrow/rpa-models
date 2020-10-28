@@ -1,8 +1,8 @@
 # training data: texts, heads and dependency labels
 # for no relation, we simply chose an arbitrary dependency label, e.g. '-'
-#
+
 # Labels: [ROOT, NOUN, TO, WHEN, BODY]
-#
+
 # The following dataset follows the following dependency ordering.
 # The ordering has priority here
 # ROOT -> ROOT

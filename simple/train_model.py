@@ -38,6 +38,8 @@ def get_datasets(name):
         return (train_mod.email.training_data.TRAIN_DATA, test_mod.email.test_data.TEST_DATA)
     elif name == "reminder":
         return (train_mod.reminder.training_data.TRAIN_DATA, test_mod.reminder.test_data.TEST_DATA)
+    elif name == "calendar":
+        return (train_mod.calendar.training_data.TRAIN_DATA, test_mod.calendar.test_data.TEST_DATA) 
     else:
         raise Exception("Could not find dataset directory with the name ", name)
 

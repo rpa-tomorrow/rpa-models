@@ -7,4 +7,14 @@ TEST_DATA = [
     "email today's date to aron@bing.com",
     "write an email to gustav@google.com",
     "send an email with an emoji to Viktor",
+
+    # "send an email to mark@gmail.com and attach text.txt",
+    # "Attach funnyImages.jpg and send the message to martin@gmail.com",
+    # "Post a message containing file to recipient",
+    # "send an email to mark@gmail.com and attach text.txt",
+    # "Forward an email to recipient containing image.png",
+    # "to Hugo write an email with tomorrow's weather and attach img.jpeg",
+    # "write an email to Sigbjörn asking if yesterday's party was fun and attach partyhard.gif",
+    # "containing important.pdf dispatch and email to mark@gmail.com",
+    # "Post a message to Aron and pin test.txt",
 ]

@@ -37,3 +37,11 @@ def modelSelectorTest(input):
 
     except:
         return (0, "", 0, 0, "unsupported")
+
+# # code used for calling the model selector, might be used later
+# # model selector for substorm project
+# for val in TEST_DATA:
+#     res = modelSelectorTest(val)
+#     print("res = " + res[4])
+#     if res[4] != "unsupported": 
+#         print("model has been selected = ", res[4])
