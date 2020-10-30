@@ -3,7 +3,6 @@ TEST_DATA = [
     "Schedule a reminder at one with the text go to work",
     "With hugo@gmail.com schedule a meeting at 14.00",
     "Schedule at 15.00 a meeting about Rust with alexander@gmail.com",
-
     "Delete scheduled meeting at three",
     "Delete scheduled meeting at 17.00 with martin@gmail.com",
     "At 10 am delete scheduled meeting",

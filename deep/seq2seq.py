@@ -118,7 +118,7 @@ if __name__ == "__main__":
                        "remind <TO> my team <WHEN> friday <BODY> Meeting."]
 
     # Add custom vectors for tagging stuff
-    keywords = {"<START>": np.random.uniform(-1, 1, (300,)),
+    keywords = {"<WHEN>": np.random.uniform(-1, 1, (300,)),
                 "<END>": np.random.uniform(-1, 1, (300,)),
                 "<TO>": np.random.uniform(-1, 1, (300,)),
                 "<WHEN>": np.random.uniform(-1, 1, (300,)),
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     dataset_targets = []
     for i in range(len(dataset_outputs)):
         dataset_targets.append(dataset_outputs[i] + " <END>");
-        dataset_outputs[i] = "<START> " + dataset_outputs[i]
+        dataset_outputs[i] = "<WHEN> " + dataset_outputs[i]
     
     # Convert sentences into vectors of words
     input_vectors = extract_word_embeddings(nlp, keywords, dataset_inputs)
@@ -225,7 +225,7 @@ if __name__ == "__main__":
                 found_end_token = False;
                 tries = 1
                 result = ""
-                inputs_word = keywords["<START>"];
+                inputs_word = keywords["<WHEN>"];
                 while not found_end_token and tries > 0:
                     tries -= 1
                     outputs = model.forward_without_teacher(inputs, hidden, inputs_word).cpu()
