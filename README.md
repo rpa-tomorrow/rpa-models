@@ -1,8 +1,11 @@
 # rpa-models
 This repository ONLY contains the datasets and scripts used to train the models in RPA Tomorrow. Currently
-only two models are under development:
+only two categories of models are under development:
 - deep (using seq2seq)
-- simple (smaller model built from scratch)
+- simple (smaller models trained from scratch)
+  - simple-email
+  - simple-calendar
+  - simple-reminder
 
 # Requirements
 * Python 3.8.5
