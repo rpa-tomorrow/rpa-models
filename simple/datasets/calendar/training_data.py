@@ -30,6 +30,14 @@ TRAIN_DATA = [
         },
     ),
     (
+        "Schedule me and Sigurd at 2",
+        {
+            
+            "heads": [0, 0, 3, 0, 5, 0], 
+            "deps": ["ROOT", "TO", "-", "TO", "-", "START"],
+        },
+    ),
+    (
         "Schedule a meeting at 09.00",
         {
             "heads": [0, 2, 0, 4, 0], 
@@ -57,7 +65,6 @@ TRAIN_DATA = [
             "deps": ["ROOT", "-", "NOUN", "-", "START", "-", "BODY", "BODY", "BODY"],
         },
     ),
-
     (
         "Schedule a conferance at 09.00",
         {
@@ -100,8 +107,71 @@ TRAIN_DATA = [
             "deps": ["ROOT", "-", "START", "-", "NOUN", "-", "BODY", "-", "TO"],
         },
     ),
+    # Schedule meeting asking the receiver about time
+    (
+        # 0       1  2   3    4  5     6   7    8   9  
+        "Schedule me and Anna at eight ask when to stop",
+        {
+            "heads": [0, 0, 3, 0, 5, 0, 0, 6, 7, 8], 
+            "deps": ["ROOT", "TO", "-", "TO", "-", "START", "BODY", "BODY", "BODY", "BODY"],
+        },
+    ),
+    (
+        "At 9 schedule a conferance asking the length with Emelie",
+        {
+            "heads": [1, 2, 2, 4, 2, 2, 5, 6, 9, 2],
+            "deps": ["-", "START", "ROOT", "-", "NOUN", "BODY", "BODY", "BODY", "-", "TO"],
+        },
+    ),
+    (
+        "Schedule a meeting at 11 ask Gustav when to end",
+        {
+            "heads": [0, 2, 0, 4, 0, 6, 0, 0, 7, 8], 
+            "deps": ["ROOT", "-", "NOUN", "-", "WHEN", "-", "TO", "BODY", "BODY", "BODY"],
+        },
+    ),
 
-    # arrange
+    # Schedule with time span
+    (
+        "Schedule me at 08.00 to 08.30 ",
+        {
+            "heads": [0, 0, 3, 0, 5, 0], 
+            "deps": ["ROOT", "TO", "-", "START", "-", "END"],
+        },
+    ),
+    (
+        "Schedule a meeting at 09.00 to 10.00",
+        {
+            "heads": [0, 2, 0, 4, 0, 6, 0], 
+            "deps": ["ROOT", "-", "NOUN", "-", "START", "-", "END"],
+        },
+    ),
+
+    (
+        "With anton@gmail.com schedule a meeting at 14.00 to 14.15",
+        {
+            "heads": [1, 2, 2, 4, 2, 6, 2, 8, 2], 
+            "deps": ["-", "TO", "ROOT", "-", "NOUN", "-", "START", "-", "END"],
+        },
+    ),
+
+    (
+        "At 2 to 3 schedule a meeting with Stefan about current project",
+        {
+            "heads": [1, 4, 3, 4,  4, 6, 4, 8, 4, 11, 6, 11],
+            "deps": ["-", "START", "-", "END", "ROOT", "-", "NOUN", "-", "TO", "-", "BODY", "BODY"],
+        },
+    ),
+    (
+        "Create at 15.00 to 15.15 a meeting about Test with sten@gmail.com",
+        {
+            "heads": [0, 2, 0, 4, 0, 6, 0, 8, 6, 10, 6], 
+            "deps": ["ROOT", "-", "START", "-", "END", "-", "NOUN", "-", "BODY", "-", "TO"],
+        },
+    ),
+
+
+    # Arrange
     (
         "At 2 arrange a meeting with Niklas about kernel development",
         {
@@ -124,7 +194,7 @@ TRAIN_DATA = [
         },
     ),
 
-    # create
+    # Create
     (
         "Create meeting at three",
         {
@@ -182,7 +252,7 @@ TRAIN_DATA = [
         },
     ),
 
-    # appoint 
+    # Appoint 
     (
         "Appoint meeting at three",
         {
@@ -219,44 +289,7 @@ TRAIN_DATA = [
         },
     ),
 
-    # appoint 
-    (
-        "Appoint meeting at three",
-        {
-            "heads": [0, 0, 3, 0], 
-            "deps": ["ROOT", "NOUN", "-", "START"],
-        },
-    ),
-    (
-        "Appoint a meeting at 14.57 with Ingemar",
-        {
-            "heads": [0, 2, 0, 4, 0, 6, 2], 
-            "deps": ["ROOT", "-", "NOUN", "-", "START", "-", "TO"],
-        },
-    ),
-    (
-        "At 02.00 appoint a meeting",
-        {
-            "heads": [1, 2, 2, 4, 2], 
-            "deps": ["-", "START", "ROOT", "-", "NOUN"],
-        },
-    ),
-    (
-        "At 4 pm appoint a meeting with Birgitta",
-        {
-            "heads": [1, 3, 1, 3, 5, 3, 7, 5], 
-            "deps": ["-", "START", "START", "ROOT", "-", "NOUN", "-", "TO"],
-        },
-    ),
-    (
-        "With stina@gmail.com appoint a meeting at 15.34",
-        {
-            "heads": [1, 2, 2, 4, 2, 6, 4], 
-            "deps": ["-", "TO", "ROOT", "-", "NOUN", "-", "START"],
-        },
-    ),
-
-    # delete
+    # Delete
     (
         "Delete scheduled meeting at three",
         {
@@ -308,5 +341,6 @@ TRAIN_DATA = [
             "deps": ["NOUN", "ROOT", "NOUN", "-", "START", "-", "TO"],
         },
     ),
+
 
 ]

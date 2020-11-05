@@ -10,5 +10,10 @@ TEST_DATA = [
     "Create meeting at three",
     "At 4 pm create a meeting with britt-marie",
     "Create a meeting at 14.57 with Ingemar",
+    "Schedule Sten at 08.45 to 9.00",
+    "Schedule a meeting at 09.04 o 09.15",
+    "Schedule me and Sigge in a meeting at 5",
+    "Schedule a meeting with Tina at four asking when to stop",
+    "Schedule a conferance at seven asking the length with Wilma",
 ]
 
