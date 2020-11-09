@@ -109,7 +109,6 @@ TRAIN_DATA = [
     ),
     # Schedule meeting asking the receiver about time
     (
-        # 0       1  2   3    4  5     6   7    8   9  
         "Schedule me and Anna at eight ask when to stop",
         {
             "heads": [0, 0, 3, 0, 5, 0, 0, 6, 7, 8], 
@@ -140,13 +139,26 @@ TRAIN_DATA = [
         },
     ),
     (
+        "Schedule me at 11.00 to 12.00 about lunch",
+        {
+            "heads": [0, 0, 3, 0, 5, 0, 7, 0], 
+            "deps": ["ROOT", "TO", "-", "START", "-", "END", "-", "BODY"],
+        },
+    ),
+    (
         "Schedule a meeting at 09.00 to 10.00",
         {
             "heads": [0, 2, 0, 4, 0, 6, 0], 
             "deps": ["ROOT", "-", "NOUN", "-", "START", "-", "END"],
         },
     ),
-
+    (
+        "Schedule meeting at 16.15 to 16.00 about software architecture",
+        {
+            "heads": [0, 0, 3, 0, 5, 0, 7, 8, 0], 
+            "deps": ["ROOT", "NOUN", "-", "START", "-", "END", "-", "BODY", "BODY"],
+        },
+    ),
     (
         "With anton@gmail.com schedule a meeting at 14.00 to 14.15",
         {

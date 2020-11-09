@@ -15,5 +15,6 @@ TEST_DATA = [
     "Schedule me and Sigge in a meeting at 5",
     "Schedule a meeting with Tina at four asking when to stop",
     "Schedule a conferance at seven asking the length with Wilma",
+    "Schedule a meeting at 16.00 to 16.45 about hot dogs"
 ]
 
