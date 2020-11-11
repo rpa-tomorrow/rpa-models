@@ -126,7 +126,7 @@ TRAIN_DATA = [
         "Schedule a meeting at 11 ask Gustav when to end",
         {
             "heads": [0, 2, 0, 4, 0, 6, 0, 0, 7, 8], 
-            "deps": ["ROOT", "-", "NOUN", "-", "WHEN", "-", "TO", "BODY", "BODY", "BODY"],
+            "deps": ["ROOT", "-", "NOUN", "-", "START", "-", "TO", "BODY", "BODY", "BODY"],
         },
     ),
 
