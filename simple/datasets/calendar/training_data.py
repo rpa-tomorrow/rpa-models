@@ -354,5 +354,77 @@ TRAIN_DATA = [
         },
     ),
 
+    # Reschedule
+    (
+        "Reschedule meeting at 9:00 to 9:30",
+        {
+            "heads": [0, 0, 3, 0, 5, 0], 
+            "deps": ["ROOT", "NOUN", "-", "START", "-", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule meeting at three pm to four pm",
+        {
+            "heads": [0, 0, 3, 0, 3, 6, 0, 6], 
+            "deps": ["ROOT", "NOUN", "-", "START", "START", "-", "NSTART", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule meeting at 17.00 with martin@gmail.com to 19.00",
+        {
+            "heads": [0, 0, 3, 0, 5, 0, 7, 0], 
+            "deps": ["ROOT", "NOUN", "-", "START", "-", "TO", "-", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule meeting at six am with martin@gmail.com to six pm",
+        {
+            "heads": [0, 0, 3, 0, 3, 6, 0, 8, 0, 8], 
+            "deps": ["ROOT", "NOUN", "-", "START", "START", "-", "TO", "-", "NSTART", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule conferance at 14.00 with martin@gmail.com to 14.30",
+        {
+            "heads": [0, 0, 3, 0, 5, 0, 7, 0], 
+            "deps": ["ROOT", "NOUN", "-", "START", "-", "TO", "-", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule conferance at eleven am with martin@gmail.com to ten pm",
+        {
+            "heads": [0, 0, 3, 0, 3, 6, 0, 8, 0, 8], 
+            "deps": ["ROOT", "NOUN", "-", "START", "START", "-", "TO", "-", "NSTART", "NSTART"],
+        },
+    ), 
+    (
+        "Reschedule Scrum meeting to 13:00",
+        {
+            "heads": [0, 2, 0, 4, 0], 
+            "deps": ["ROOT", "BODY", "NOUN", "-", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule Daily standup meeting to 08:00",
+        {
+            "heads": [0, 3, 1, 0, 5, 0], 
+            "deps": ["ROOT", "BODY", "BODY", "NOUN", "-", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule meeting with John to 12:45",
+        {
+            "heads": [0, 0, 3, 0, 5, 0], 
+            "deps": ["ROOT", "NOUN", "-", "TO", "-", "NSTART"],
+        },
+    ),
+    (
+        "Reschedule meeting with John to four pm",
+        {
+            "heads": [0, 0, 3, 0, 5, 0, 5], 
+            "deps": ["ROOT", "NOUN", "-", "TO", "-", "NSTART", "NSTART"],
+        },
+    ),
+
 
 ]
