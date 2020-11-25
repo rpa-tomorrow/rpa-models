@@ -21,5 +21,6 @@ TEST_DATA = [
     "Reschedule meeting at 10:30 to 11:00",
     "Reschedule Scrum meeting to 14:00",
     "Reschedule meeting with John to 10:15",
+    "Reschedule meeting about Testing to 16:20",
 ]
 

@@ -412,6 +412,13 @@ TRAIN_DATA = [
         },
     ),
     (
+        "Reschedule meeting about Development to 14:40",
+        {
+            "heads": [0, 0, 3, 0, 5, 0], 
+            "deps": ["ROOT", "NOUN", "-", "BODY", "-", "NSTART"],
+        },
+    ),
+    (
         "Reschedule meeting with John to 12:45",
         {
             "heads": [0, 0, 3, 0, 5, 0], 
