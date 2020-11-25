@@ -384,14 +384,14 @@ TRAIN_DATA = [
         },
     ),
     (
-        "Reschedule conferance at 14.00 with martin@gmail.com to 14.30",
+        "Reschedule conference at 14.00 with martin@gmail.com to 14.30",
         {
             "heads": [0, 0, 3, 0, 5, 0, 7, 0], 
             "deps": ["ROOT", "NOUN", "-", "START", "-", "TO", "-", "NSTART"],
         },
     ),
     (
-        "Reschedule conferance at eleven am with martin@gmail.com to ten pm",
+        "Reschedule conference at eleven am with martin@gmail.com to ten pm",
         {
             "heads": [0, 0, 3, 0, 3, 6, 0, 8, 0, 8], 
             "deps": ["ROOT", "NOUN", "-", "START", "START", "-", "TO", "-", "NSTART", "NSTART"],
@@ -405,7 +405,7 @@ TRAIN_DATA = [
         },
     ),
     (
-        "Reschedule Daily standup meeting to 08:00",
+        "Reschedule Daily scrum meeting to 08:00",
         {
             "heads": [0, 3, 1, 0, 5, 0], 
             "deps": ["ROOT", "BODY", "BODY", "NOUN", "-", "NSTART"],

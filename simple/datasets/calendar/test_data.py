@@ -16,7 +16,7 @@ TEST_DATA = [
     "Schedule a meeting with Tina at four asking when to stop",
     "Schedule a conferance at seven asking the length with Wilma",
     "Schedule a meeting at 16.00 to 16.45 about hot dogs",
-    "Reschedule conferance at 19.00 with niklas@mail.com to 21.30",
+    "Reschedule conference at 19.00 with niklas@mail.com to 21.30",
     "Reschedule meeting at 08.00 with niklas@mail.com to 10.30",
     "Reschedule meeting at 10:30 to 11:00",
     "Reschedule Scrum meeting to 14:00",
